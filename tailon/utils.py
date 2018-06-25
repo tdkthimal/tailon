@@ -91,12 +91,12 @@ class FileLister:
         for group, paths in self.groups.items():
             files = self.files.setdefault(group, [])
             for path in paths:
-                if '.log' in path:
-                    if os.path.isdir(path):
-                        self.all_dir_names.add(path)
-                        files.extend(self.lister.listdir(path))
-                    else:
-                        files.append(path)
+                print('Utils : '+str(path), file=sys.stderr)
+                if os.path.isdir(path):
+                    self.all_dir_names.add(path)
+                    files.extend(self.lister.listdir(path))
+                else:
+                    files.append(path)
 
             self.files[group] = list(self.lister.statfiles(files, self.include_missing))
 
